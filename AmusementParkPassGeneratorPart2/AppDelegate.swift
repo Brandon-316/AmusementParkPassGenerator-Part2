@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  AmusementParkPassGeneratorPart2
 //
-//  Created by Brandon Mahoney on 12/24/16.
+//  Created by Brandon Mahoney on 11/25/16.
 //  Copyright © 2016 Brandon Mahoney. All rights reserved.
 //
 
