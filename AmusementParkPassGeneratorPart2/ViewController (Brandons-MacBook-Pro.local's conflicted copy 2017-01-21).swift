@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AmusementParkPassGeneratorPart2
 //
-//  Created by Brandon Mahoney on 11/25/16.
+//  Created by Brandon Mahoney on 12/24/16.
 //  Copyright © 2016 Brandon Mahoney. All rights reserved.
 //
 
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         textField.backgroundColor = UIColor.white
     }
     
-//Blank subtype toolbar at startup//
+    
     func initialToolBar() {
         noSubTypeToolBar.isHidden = false
         employeeToolBar.isHidden = true
@@ -217,7 +217,6 @@ class ViewController: UIViewController {
             noSubTypeToolBar.isHidden = false
             employeeToolBar.isHidden = true
             guestToolBar.isHidden = true
-            resetForm()
             requireTextField(textField: firstName)
             requireTextField(textField: lastName)
             requireTextField(textField: streetAddress)
@@ -263,11 +262,6 @@ class ViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }catch ErrorTypes.EntrantTypeNil{
             let alertController = UIAlertController(title: "Missing Entrant Type", message: "Please Select a Entrant Type.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
-        }catch ErrorTypes.DateFormat{
-            let alertController = UIAlertController(title: "Date Is In Incorrect Format", message: "Date must be in the format 11/11/2017", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)
@@ -317,22 +311,7 @@ class ViewController: UIViewController {
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)
         }catch ErrorTypes.NumbersOnly{
-            let alertController = UIAlertController(title: "Must Only Contain Numbers", message: "Zipcode and Project Number fields may only contain numbers", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
-        }catch ErrorTypes.PhoneNumberFormat{
-            let alertController = UIAlertController(title: "Phone Number in Incorrect Format", message: "Phone number must be in the format 123-123-1234", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
-        }catch ErrorTypes.ChildIsOlderThan5{
-            let alertController = UIAlertController(title: "Child Older Than 5", message: "Child must be 5 years old or younger", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
-        }catch ErrorTypes.SeniorIsYoungerThan55{
-            let alertController = UIAlertController(title: "Guest is Younger Than 55", message: "Senior must be 55 years or older", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Must Only Contain Numbers", message: "Zipcode and Project Number Fields May Only Contain Letters", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)
@@ -347,6 +326,7 @@ class ViewController: UIViewController {
 //Check For Required Fields//
     func checkForRequiredFields() throws {
         //Checking that required are all filled out//
+        let letters = NSCharacterSet.letters
         
         let textChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         let disallowedCharacterSet = CharacterSet(charactersIn: textChars).inverted
@@ -354,7 +334,8 @@ class ViewController: UIViewController {
         let numChars = "0123456789"
         let disallowedNonNumSet = CharacterSet(charactersIn: numChars).inverted
         
-        //Checks if required fields are filled//
+        let entrant = entrantType
+        
         let textFields = [dateOfBirth, dateOfVisit, phoneNumber, firstName, lastName, companyName, streetAddress, city, state, zipCode, projectNmbr]
         for textField in textFields {
             if textField?.backgroundColor == .white && textField?.text?.isEmpty == true {
@@ -362,49 +343,46 @@ class ViewController: UIViewController {
             }
         }
         
+        func onlyContainsLetters(textField: UITextField) {
+            textField.text = ""
+        }
+        
         
         switch textFields {
-        //Date Of Birth//
-        case _ where (dateOfBirth?.text?.isEmpty)! == false && isValidDate(date: dateOfBirth.text!) == false: throw ErrorTypes.DateFormat
-            
         //Phone Number//
-        case _ where (phoneNumber?.text?.isEmpty)! == false && isValidPhoneNmbr(phoneNmbr: phoneNumber.text!) == false: throw ErrorTypes.PhoneNumberFormat
-        case _ where phoneNumber?.text?.isEmpty == false && (phoneNumber?.text?.count)! < 12: throw ErrorTypes.PhoneNumberLessThan12
+        case _ where phoneNumber?.text?.isEmpty == false && (phoneNumber?.text?.characters.count)! < 12: throw ErrorTypes.PhoneNumberLessThan12
         
         //Project Number//
-        case _ where projectNmbr?.text?.isEmpty == false && (projectNmbr?.text?.count)! < 7: throw ErrorTypes.ProjectNumLessThan7
+        case _ where projectNmbr?.text?.isEmpty == false && (projectNmbr?.text?.characters.count)! < 7: throw ErrorTypes.ProjectNumLessThan7
         case _ where projectNmbr?.text?.isEmpty == false && projectNmbr?.text?.rangeOfCharacter(from: disallowedNonNumSet) != nil: throw ErrorTypes.NumbersOnly
             
         //Name Fields//
-        case _ where firstName?.text?.isEmpty == false && (firstName?.text?.count)! < 2: throw ErrorTypes.FirstNameFieldLessThan2Char
+        case _ where firstName?.text?.isEmpty == false && (firstName?.text?.characters.count)! < 2: throw ErrorTypes.FirstNameFieldLessThan2Char
         case _ where firstName?.text?.isEmpty == false && firstName?.text?.rangeOfCharacter(from: disallowedCharacterSet) != nil: throw ErrorTypes.LettersOnly
-        case _ where lastName?.text?.isEmpty == false && (lastName?.text?.count)! < 2: throw ErrorTypes.LastNameFieldLessThan2Char
+        case _ where lastName?.text?.isEmpty == false && (lastName?.text?.characters.count)! < 2: throw ErrorTypes.LastNameFieldLessThan2Char
         case _ where lastName?.text?.isEmpty == false && lastName?.text?.rangeOfCharacter(from: disallowedCharacterSet) != nil: throw ErrorTypes.LettersOnly
 
         
         //Company Name//
-        case _ where companyName?.text?.isEmpty == false && (companyName?.text?.count)! < 2: throw ErrorTypes.CompanyLessThan2Char
+        case _ where companyName?.text?.isEmpty == false && (companyName?.text?.characters.count)! < 2: throw ErrorTypes.CompanyLessThan2Char
             
         //Street Address//
-        case _ where streetAddress?.text?.isEmpty == false && (streetAddress?.text?.count)! < 2: throw ErrorTypes.StreetLessThan2Char
+        case _ where streetAddress?.text?.isEmpty == false && (streetAddress?.text?.characters.count)! < 2: throw ErrorTypes.StreetLessThan2Char
         
         //City//
-        case _ where city?.text?.isEmpty == false && (city?.text?.count)! < 2: throw ErrorTypes.CityLessThan2Char
+        case _ where city?.text?.isEmpty == false && (city?.text?.characters.count)! < 2: throw ErrorTypes.CityLessThan2Char
         case _ where city?.text?.isEmpty == false && city?.text?.rangeOfCharacter(from: disallowedCharacterSet) != nil: throw ErrorTypes.LettersOnly
          
         //State//
-        case _ where state?.text?.isEmpty == false && (state?.text?.count)! < 2: throw ErrorTypes.StateLessThan2Char
+        case _ where state?.text?.isEmpty == false && (state?.text?.characters.count)! < 2: throw ErrorTypes.StateLessThan2Char
         case _ where state?.text?.isEmpty == false && state?.text?.rangeOfCharacter(from: disallowedCharacterSet) != nil: throw ErrorTypes.LettersOnly
             
         //Zip Code//
-        case _ where zipCode?.text?.isEmpty == false && (zipCode?.text?.count)! < 5: throw ErrorTypes.ZipCodeLessThan5
+        case _ where zipCode?.text?.isEmpty == false && (zipCode?.text?.characters.count)! < 5: throw ErrorTypes.ZipCodeLessThan5
         case _ where zipCode?.text?.isEmpty == false && zipCode?.text?.rangeOfCharacter(from: disallowedNonNumSet) != nil: throw ErrorTypes.NumbersOnly
             
         //Child Over 5 Years//
-        case _ where entrantType == .FreeChild && dateOfBirth?.text?.isEmpty == false && checkAgeIsUnder5(date: dateOfBirth.text!) == false: throw ErrorTypes.ChildIsOlderThan5
-            
-        //Senior Over 55 Years//
-        case _ where entrantType == .Senior && dateOfBirth?.text?.isEmpty == false && checkAgeIsOver55(date: dateOfBirth.text!) == false: throw ErrorTypes.SeniorIsYoungerThan55
+        case _ where entra
             
         case _ where entrantType == nil: throw ErrorTypes.EntrantTypeNil
         default: clearData()
@@ -435,7 +413,6 @@ class ViewController: UIViewController {
             let controller = segue.destination as? PassViewController
 
             controller?.nameText = "\(entrant.firstName) \(entrant.lastName)"
-            controller?.birthDay = "\(entrant.dateOfBirth)"
             
             //Set Ride Permissions Label//
             if entrant.entrantType.canAccessAllRides == true && entrant.entrantType.canSkipRideLines == true {

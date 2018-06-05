@@ -225,7 +225,7 @@ class PassViewController: UIViewController {
             doubleSwipeCountdown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runCountdown), userInfo: nil, repeats: true)
         }
         
-        func runCountdown() {
+        @objc func runCountdown() {
             count = 300
             if (count > 0){
                 count -= 1
@@ -239,19 +239,23 @@ class PassViewController: UIViewController {
         let today = NSDate()
         let dateFormatter = DateFormatter()
 //        dateFormatter.dateStyle = .short
-        dateFormatter.dateFormat = "MM/DD"
+        dateFormatter.dateFormat = "MM/dd"
         let todayString = dateFormatter.string(from: today as Date)
         
         var offsetNmbr = 0
         
-        if birthDay.characters.count == 10 {
+        if birthDay.count == 10 {
             offsetNmbr = 5
-        }else if birthDay.characters.count == 8 {
+        }else if birthDay.count == 8 {
             offsetNmbr = 3
         }
         
         let removeLast5 = birthDay.index(birthDay.endIndex, offsetBy: -offsetNmbr)
-        let trimmedDateOfBirth = birthDay.substring(to: removeLast5)
+//        let trimmedDateOfBirth = birthDay.substring(to: removeLast5)
+        let trimmedDateOfBirth = String(birthDay[..<removeLast5])
+        
+        print("\ntrimmedDatOfBirth: \(trimmedDateOfBirth)\ntodayString: \(todayString)")
+        
         
         if trimmedDateOfBirth == todayString {
             happyBirthdayLabel.isHidden = false
