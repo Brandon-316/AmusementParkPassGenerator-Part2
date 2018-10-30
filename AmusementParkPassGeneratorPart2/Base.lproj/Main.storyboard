@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Han-Wa-Kfv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Han-Wa-Kfv">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="1024" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create New Pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WTx-bU-hls">
-                                        <rect key="frame" x="422.5" y="24.5" width="180.5" height="26.5"/>
+                                        <rect key="frame" x="422" y="24" width="180.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -131,15 +129,12 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3W1-eu-33F">
                                         <rect key="frame" x="0.0" y="0.0" width="984" height="130"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="5Jp-gQ-0ef" userLabel="AccessStackView">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="5Jp-gQ-0ef" userLabel="AccessStackView">
                                                 <rect key="frame" x="0.0" y="0.0" width="984" height="60"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-0W-KWR">
+                                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="areaAccess" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-0W-KWR">
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="60"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="314" id="Qxc-z4-FID"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Area Access">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -148,10 +143,10 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="areaAccessBtn:" destination="wTj-oz-8jn" eventType="touchUpInside" id="rCQ-ke-Iev"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="29g-8Q-S2l"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-SY-tPl">
+                                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="rideAccess" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-SY-tPl">
                                                         <rect key="frame" x="335" y="0.0" width="314" height="60"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
@@ -162,10 +157,10 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="rideAccessBtn:" destination="wTj-oz-8jn" eventType="touchUpInside" id="Cfm-DS-6tO"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="qcn-Av-q4w"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9T-Bb-80U">
+                                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="discountAccess" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9T-Bb-80U">
                                                         <rect key="frame" x="670" y="0.0" width="314" height="60"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
@@ -176,26 +171,21 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="discountAccessBtn:" destination="wTj-oz-8jn" eventType="touchUpInside" id="r4e-zz-hiK"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="qKr-zo-i7c"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="5Jp-gQ-0ef" secondAttribute="height" multiplier="82:5" id="MW3-tD-2i8"/>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="Qn9-QS-WjM"/>
-                                                    <constraint firstItem="T5h-0W-KWR" firstAttribute="width" secondItem="8l6-SY-tPl" secondAttribute="width" id="ULK-WX-m0h"/>
-                                                    <constraint firstItem="8l6-SY-tPl" firstAttribute="width" secondItem="b9T-Bb-80U" secondAttribute="width" id="o6S-2I-wLD"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="neh-HR-lBr" userLabel="AreaStackView">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="neh-HR-lBr" userLabel="AreaStackView">
                                                 <rect key="frame" x="0.0" y="70" width="984" height="60"/>
                                                 <subviews>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1v-gd-jPI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="188" height="60"/>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" restorationIdentifier="amusementAreas" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1v-gd-jPI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="188" id="VS7-qN-Ot3"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Amusement">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -204,15 +194,12 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="amusementAreas:" destination="wTj-oz-8jn" eventType="touchUpInside" id="LVW-XE-iGJ"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="Yta-nD-77M"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9c-42-Y1s">
-                                                        <rect key="frame" x="199" y="0.0" width="188" height="60"/>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" restorationIdentifier="kitchenAreas" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9c-42-Y1s">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="188" id="NdB-zz-oee"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Kitchen">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -221,15 +208,12 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="kitchenAreas:" destination="wTj-oz-8jn" eventType="touchUpInside" id="cs7-Of-ViY"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="DDe-tj-BVO"/>
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYY-3L-pD7">
-                                                        <rect key="frame" x="398" y="0.0" width="188" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="188" id="J3w-15-PlH"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Ride Control">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -238,15 +222,12 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="rideControlAreas:" destination="wTj-oz-8jn" eventType="touchUpInside" id="KZ8-TV-GwZ"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="hHH-m6-yEF"/>
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHh-Tv-HMK">
-                                                        <rect key="frame" x="597" y="0.0" width="188" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="188" id="ZZ0-Yp-WTp"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Maintenance">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -255,15 +236,12 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="maintenanceAreas:" destination="wTj-oz-8jn" eventType="touchUpInside" id="rkB-WS-LI8"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="LBH-mt-Nlr"/>
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwn-RK-jMC">
-                                                        <rect key="frame" x="796" y="0.0" width="188" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="188" id="8gV-mm-Frq"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                         <state key="normal" title="Office">
                                                             <color key="titleColor" red="0.34509803921568627" green="0.58431372549019611" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -272,19 +250,13 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="6"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="officeAreas:" destination="wTj-oz-8jn" eventType="touchUpInside" id="rHu-z8-sJU"/>
+                                                            <action selector="checkAccess:" destination="wTj-oz-8jn" eventType="touchUpInside" id="6MQ-qu-dPc"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="Cpv-ju-2V6"/>
-                                                    <constraint firstItem="F1v-gd-jPI" firstAttribute="leading" secondItem="neh-HR-lBr" secondAttribute="leading" id="Eo0-BX-yim"/>
-                                                    <constraint firstItem="VHh-Tv-HMK" firstAttribute="width" secondItem="iwn-RK-jMC" secondAttribute="width" id="IvG-QN-KcH"/>
-                                                    <constraint firstAttribute="bottom" secondItem="F1v-gd-jPI" secondAttribute="bottom" id="NaE-Gz-Ldc"/>
                                                     <constraint firstAttribute="width" secondItem="neh-HR-lBr" secondAttribute="height" multiplier="82:5" id="WMb-fd-Zpl"/>
-                                                    <constraint firstItem="F1v-gd-jPI" firstAttribute="width" secondItem="e9c-42-Y1s" secondAttribute="width" id="qrh-C1-U0R"/>
-                                                    <constraint firstItem="dYY-3L-pD7" firstAttribute="width" secondItem="VHh-Tv-HMK" secondAttribute="width" id="wUf-89-zSd"/>
-                                                    <constraint firstItem="e9c-42-Y1s" firstAttribute="width" secondItem="dYY-3L-pD7" secondAttribute="width" id="z8q-Hi-h9c"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -299,19 +271,19 @@
                                                 <rect key="frame" x="0.0" y="44" width="984" height="89"/>
                                                 <subviews>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happy Birthday!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="yGy-rW-gQJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="984" height="29.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="984" height="0.0"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="zMF-yb-HmO">
-                                                        <rect key="frame" x="0.0" y="29.5" width="984" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="984" height="89"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uFk-Yk-7pt">
-                                                        <rect key="frame" x="0.0" y="59.5" width="984" height="29.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="984" height="0.0"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -348,15 +320,14 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="createNewPass:" destination="wTj-oz-8jn" eventType="touchUpInside" id="ahJ-z8-9eq"/>
-                                            <action selector="createNewPassBtn:" destination="wTj-oz-8jn" eventType="touchUpInside" id="cd4-Oc-CGB"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="3W1-eu-33F" firstAttribute="leading" secondItem="Rgv-rM-HSR" secondAttribute="leading" id="01m-eL-5og"/>
+                                    <constraint firstAttribute="trailing" secondItem="tEE-Gv-t2o" secondAttribute="trailing" id="8Z6-3a-k9o"/>
                                     <constraint firstAttribute="trailing" secondItem="3W1-eu-33F" secondAttribute="trailing" id="BCH-x6-vSy"/>
-                                    <constraint firstItem="tEE-Gv-t2o" firstAttribute="leading" secondItem="Rgv-rM-HSR" secondAttribute="leading" id="EdP-4b-uOK"/>
-                                    <constraint firstAttribute="trailing" secondItem="tEE-Gv-t2o" secondAttribute="trailing" id="uRu-Ye-tfU"/>
+                                    <constraint firstItem="tEE-Gv-t2o" firstAttribute="leading" secondItem="Rgv-rM-HSR" secondAttribute="leading" id="Wzc-bb-luP"/>
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G1k-H7-5Ef" userLabel="Grey Seperator">
@@ -370,7 +341,7 @@
                                 <rect key="frame" x="20" y="673" width="984" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="z46-ee-uVK">
-                                        <rect key="frame" x="383.5" y="0.0" width="217" height="39.5"/>
+                                        <rect key="frame" x="383" y="0.0" width="218" height="39.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="z46-ee-uVK" secondAttribute="height" multiplier="72:13" id="fnU-L7-kKS"/>
                                         </constraints>

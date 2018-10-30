@@ -476,11 +476,11 @@ class ViewController: UIViewController {
         dateOfBirth.text = "03/16/1981"
         firstName.text = "Brandon"
         lastName.text = "Mahoney"
-        dateOfVisit.text = "12/25/2016"
-        streetAddress.text = "201 Willet Dr"
-        city.text = "Buda"
+        dateOfVisit.text = "06/06/2018"
+        streetAddress.text = "1100 Congress Ave"
+        city.text = "Austin"
         state.text = "Texas"
-        zipCode.text = "78610"
+        zipCode.text = "78701"
     }
     
 //Set Text Fields Back to nil//
