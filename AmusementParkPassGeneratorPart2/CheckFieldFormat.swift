@@ -18,6 +18,11 @@ func isValidEmail(testStr:String) -> Bool {
 }
 
 func isValidPhoneNmbr(phoneNmbr:String) -> Bool {
+    if phoneNmbr.count != 12 {
+        return false
+    }
+    
+    
     let emailRegEx = "[0-9]+-[0-9]+-[0-9]{2,}"
     
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

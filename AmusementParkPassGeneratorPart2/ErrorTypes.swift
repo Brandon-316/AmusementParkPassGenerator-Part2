@@ -19,7 +19,7 @@ enum ErrorTypes: Error {
     case FirstNameFieldLessThan2Char
     case LastNameFieldLessThan2Char
     case ZipCodeLessThan5
-    case ProjectNumLessThan7
+    case ProjectNumLessThan4
     case CompanyLessThan2Char
     case StreetLessThan2Char
     case CityLessThan2Char

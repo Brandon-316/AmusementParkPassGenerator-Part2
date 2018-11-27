@@ -15,7 +15,7 @@ var birth = NSDateComponents()
 //////////////////
 //Entrant Class///
 //////////////////
-class Entrant: Name, Address, BirthDate {
+class Entrant: Nameable, Addressable, BirthDateable {
     var firstName: String
     var lastName: String
     
@@ -30,11 +30,11 @@ class Entrant: Name, Address, BirthDate {
     var dayOfBirth: Int
     var yearOfBirth: Int
     
-    var entrantType: EntrantPassType
+    var entrantType: EntrantType
     
     
     
-    init(firstName: String, lastName: String, street: String, city: String, state: String, zip: String, dateOfBirth: String, monthOfBirth: Int, dayOfBirth: Int, yearOfBirth: Int, entrantType: EntrantPassType) {
+    init(firstName: String, lastName: String, street: String, city: String, state: String, zip: String, dateOfBirth: String, monthOfBirth: Int, dayOfBirth: Int, yearOfBirth: Int, entrantType: EntrantType) {
         self.firstName = firstName
         self.lastName = lastName
         self.street = street
@@ -53,27 +53,31 @@ class Entrant: Name, Address, BirthDate {
 /////////////////
 //Required Info//
 /////////////////
-protocol Name {
+protocol Nameable {
     var firstName: String { get set }
     var lastName: String {get set }
 }
 
-protocol Address {
+protocol Addressable {
     var street: String { get set }
     var city: String { get set }
     var state: String { get set }
     var zip: String { get set }
 }
 
-protocol BirthDate {
+protocol BirthDateable {
     var dayOfBirth: Int { get set }
     var monthOfBirth: Int { get set }
     var yearOfBirth: Int { get set }
 }
 
-protocol Company {
+protocol CompanyNameable {
     var vendorCompany: String { get set }
     var visit: Date { get set }
+}
+
+protocol Contractable {
+    var projectNumber: String { get set }
 }
 
 

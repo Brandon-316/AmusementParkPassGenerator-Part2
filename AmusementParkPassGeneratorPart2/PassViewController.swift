@@ -13,7 +13,9 @@ import AudioToolbox
 class PassViewController: UIViewController {
     
 // MARK: Properties
-    var entrantType: EntrantPassType? = nil
+    var entrant: Entrant? = nil
+    
+    var entrantType: EntrantType? = nil
     
     var doubleSwipeCountdown = Timer()
     var count = 0
@@ -22,11 +24,20 @@ class PassViewController: UIViewController {
     var accessDeniedSound: SystemSoundID = 1
     
     var birthDay = ""
-    var nameText = ""
-    var passType = ""
-    var rideAccess = ""
-    var foodDiscount = ""
-    var merchDiscount = ""
+    
+    // Counts
+    var amusementCount = 0
+    var kitchenCount = 0
+    var rideControlCount = 0
+    var maintenanceCount = 0
+    var officeCount = 0
+    // Timers
+    var amusementTimer = Timer()
+    var kitchenTimer = Timer()
+    var rideControlTimer = Timer()
+    var maintenanceTimer = Timer()
+    var officeTimer = Timer()
+    
     
 // MARK: Outlets
     //Generated Pass//
@@ -53,12 +64,7 @@ class PassViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        passNameLabel.text = entrant.firstName
-        passNameLabel.text = nameText
-        passTypeLabel.text = passType
-        rideAccessLabel.text = rideAccess
-        foodDiscountLabel.text = foodDiscount
-        merchDscntLabel.text = merchDiscount
+        setLabels()
 
     }
     
@@ -72,14 +78,43 @@ class PassViewController: UIViewController {
     
     
 // MARK: Methods
+    //Set labels
+    func setLabels() {
+        guard let entrant = self.entrant else { return }
+        
+        passNameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
+        passTypeLabel.text = entrant.entrantType.passTypeString
+        
+        //Set Ride Permissions Label//
+        if entrant.entrantType.canAccessAllRides == true && entrant.entrantType.canSkipRideLines == true {
+            rideAccessLabel.text = "Unlimited Rides - Skip Ride Lines"
+        }else if entrant.entrantType.canAccessAllRides == true{
+            rideAccessLabel.text = "Unlimited Rides"
+        }else{
+            rideAccessLabel.text = ""
+        }
+        
+        foodDiscountLabel.text = "\(entrant.entrantType.foodDiscount)% Food Discount"
+        merchDscntLabel.text = "\(entrant.entrantType.merchandiseDiscount)% Merch Discount"
+        
+    }
+    
     //Test Area Access//
-    func accessTest(area: Bool) {
-        if area == true {
+    func accessTest(forArea area: AccessArea, canAccess: Bool, count: inout Int, timer: inout Timer) {
+        if canAccess == true && count == 0 {
+            print("Fist if")
+            startCountdown(forArea: area, count: &count, timer: &timer)
             testResultsLabel.text = "Access Granted"
             testResultsView.backgroundColor = UIColor.green
             testResultsLabel2.isHidden = true
             playAccessGrantedSound()
+        }else if canAccess == true && count > 0 {
+            print("Second if")
+            testResultsLabel.text = "Only one swipe per guest"
+            testResultsView.backgroundColor = UIColor.red
+            playAccessDeniedSound()
         }else{
+            print("Third if")
             testResultsLabel.text = "Access Denied"
             testResultsView.backgroundColor = UIColor.red
             testResultsLabel2.isHidden = true
@@ -90,16 +125,11 @@ class PassViewController: UIViewController {
     //Test Ride Access//
     //Can Ride All Rides//
     func rideAccessTest(rideAccess: Bool) {
-        if rideAccess == true && count == 0{
-            startCountdown()
+        if rideAccess == true {
             testResultsLabel.text = "You May Ride All Rides"
             testResultsView.backgroundColor = UIColor.green
             playAccessGrantedSound()
-        }else if rideAccess == true && count > 0{
-            testResultsLabel.text = "Only one swipe per guest"
-            testResultsView.backgroundColor = UIColor.red
-            playAccessDeniedSound()
-        }else{
+        } else {
             testResultsLabel.text = "You May Not Ride Any Rides"
             testResultsView.backgroundColor = UIColor.red
             playAccessDeniedSound()
@@ -164,21 +194,7 @@ class PassViewController: UIViewController {
     }
     
     
-    //Timer Methods//
-        func startCountdown() {
-            count = 5
-            doubleSwipeCountdown = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runCountdown), userInfo: nil, repeats: true)
-        }
-        
-        @objc func runCountdown() {
-            print(count)
-            if (count > 0){
-                count -= 1
-            }else{
-                doubleSwipeCountdown.invalidate()
-                print("invalidated")
-            }
-        }
+    
     
     //Check Birthday Method//
     func checkBirthday() {
@@ -200,7 +216,7 @@ class PassViewController: UIViewController {
 //        let trimmedDateOfBirth = birthDay.substring(to: removeLast5)
         let trimmedDateOfBirth = String(birthDay[..<removeLast5])
         
-        print("\ntrimmedDatOfBirth: \(trimmedDateOfBirth)\ntodayString: \(todayString)")
+        print("\ntrimmedDateOfBirth: \(trimmedDateOfBirth)\ntodayString: \(todayString)")
         
         
         if trimmedDateOfBirth == todayString {
@@ -229,11 +245,11 @@ class PassViewController: UIViewController {
     @IBAction func checkAccess(_ sender: UIButton) {
         switch sender.restorationIdentifier {
             case "areaAccess": handleAreaAccessPressed()
-            case "amusementAreas": accessTest(area: (entrantType?.canAccessAmusementAreas)!)
-            case "kitchenAreas": accessTest(area: (entrantType?.canAccessKitchenAreas)!)
-            case "rideControlAreas": accessTest(area: (entrantType?.canAccessRideControlAreas)!)
-            case "officeAreas": accessTest(area: (entrantType?.canAccessOfficeAreas)!)
-            case "maintenanceAreas": accessTest(area: (entrantType?.canAccessMaintenanceAreas)!)
+            case "amusementAreas": accessTest(forArea: .Amusement, canAccess: (entrantType?.canAccessAmusementAreas)!, count: &amusementCount, timer: &amusementTimer)
+            case "kitchenAreas": accessTest(forArea: .Kitchen, canAccess: (entrantType?.canAccessKitchenAreas)!, count: &kitchenCount, timer: &kitchenTimer)
+            case "rideControlAreas": accessTest(forArea: .RideControl, canAccess: (entrantType?.canAccessRideControlAreas)!, count: &rideControlCount, timer: &rideControlTimer)
+            case "officeAreas": accessTest(forArea: .Office, canAccess: (entrantType?.canAccessOfficeAreas)!, count: &officeCount, timer: &officeTimer)
+            case "maintenanceAreas": accessTest(forArea: .Maintenance, canAccess: (entrantType?.canAccessMaintenanceAreas)!, count: &maintenanceCount, timer: &maintenanceTimer)
             case "rideAccess":
                                 hideAreaAccessBtns()
                                 rideAccessTest(rideAccess: (entrantType?.canAccessAllRides)!)
@@ -252,4 +268,5 @@ class PassViewController: UIViewController {
     @IBAction func createNewPass(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }
