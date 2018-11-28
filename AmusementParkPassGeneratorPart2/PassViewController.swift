@@ -82,7 +82,9 @@ class PassViewController: UIViewController {
     func setLabels() {
         guard let entrant = self.entrant else { return }
         
-        passNameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
+        if let nameableEntrant = entrant as? Nameable {
+            passNameLabel.text = nameableEntrant.fullName
+        }
         passTypeLabel.text = entrant.entrantType.passTypeString
         
         //Set Ride Permissions Label//
@@ -101,20 +103,27 @@ class PassViewController: UIViewController {
     
     //Test Area Access//
     func accessTest(forArea area: AccessArea, canAccess: Bool, count: inout Int, timer: inout Timer) {
+        
+        if checkDateOfVisit() == false {
+            testResultsLabel.text = "Access Denied - Please See A Manager"
+            testResultsLabel2.text = "You are not authorized to visit today."
+            testResultsView.backgroundColor = UIColor.red
+            testResultsLabel2.isHidden = false
+            playAccessDeniedSound()
+            return
+        }
+        
         if canAccess == true && count == 0 {
-            print("Fist if")
             startCountdown(forArea: area, count: &count, timer: &timer)
             testResultsLabel.text = "Access Granted"
             testResultsView.backgroundColor = UIColor.green
             testResultsLabel2.isHidden = true
             playAccessGrantedSound()
         }else if canAccess == true && count > 0 {
-            print("Second if")
             testResultsLabel.text = "Only one swipe per guest"
             testResultsView.backgroundColor = UIColor.red
             playAccessDeniedSound()
         }else{
-            print("Third if")
             testResultsLabel.text = "Access Denied"
             testResultsView.backgroundColor = UIColor.red
             testResultsLabel2.isHidden = true
@@ -198,38 +207,54 @@ class PassViewController: UIViewController {
     
     //Check Birthday Method//
     func checkBirthday() {
-        let today = NSDate()
-        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .short
-        dateFormatter.dateFormat = "MM/dd"
-        let todayString = dateFormatter.string(from: today as Date)
+        guard let unwrappedEntrant = self.entrant else { return }
         
-        var offsetNmbr = 0
-        
-        if birthDay.count == 10 {
-            offsetNmbr = 5
-        }else if birthDay.count == 8 {
-            offsetNmbr = 3
+        if let entrant = unwrappedEntrant as? BirthDateable {
+            let today = NSDate()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd"
+            let todayString = dateFormatter.string(from: today as Date)
+            
+            var offsetNmbr = 0
+            
+            if entrant.birthDate.count == 10 {
+                offsetNmbr = 5
+            }else if entrant.birthDate.count == 8 {
+                offsetNmbr = 3
+            }
+            
+            let removeLast5 = entrant.birthDate.index(entrant.birthDate.endIndex, offsetBy: -offsetNmbr)
+            let trimmedDateOfBirth = String(entrant.birthDate[..<removeLast5])
+            
+            if trimmedDateOfBirth == todayString {
+                happyBirthdayLabel.isHidden = false
+                happyBirthdayLabel.text = "Happy Birthday!"
+            }else{
+                happyBirthdayLabel.isHidden = true
+            }
         }
+    }
+    
+    func checkDateOfVisit() -> Bool {
+        guard let unwrappedEntrant = self.entrant else { return false }
         
-        let removeLast5 = birthDay.index(birthDay.endIndex, offsetBy: -offsetNmbr)
-//        let trimmedDateOfBirth = birthDay.substring(to: removeLast5)
-        let trimmedDateOfBirth = String(birthDay[..<removeLast5])
-        
-        print("\ntrimmedDateOfBirth: \(trimmedDateOfBirth)\ntodayString: \(todayString)")
-        
-        
-        if trimmedDateOfBirth == todayString {
-            happyBirthdayLabel.isHidden = false
-            happyBirthdayLabel.text = "Happy Birthday!"
-        }else{
-            happyBirthdayLabel.isHidden = true
+        if let entrant = unwrappedEntrant as? VisitDateable {
+            let today = NSDate()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            let todayString = dateFormatter.string(from: today as Date)
+            
+            if entrant.visitDate == todayString {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return true
         }
-        
     }
     
     func handleAreaAccessPressed() {
-        happyBirthdayLabel.isHidden = true
         let buttons = [amusementAreasBtn, kitchenAreasBtn, rideControlAreasBtn, maintenanceAreasBtn, officeAreasBtn]
         for button in buttons {
             if button?.isHidden == true{
@@ -245,20 +270,30 @@ class PassViewController: UIViewController {
     @IBAction func checkAccess(_ sender: UIButton) {
         switch sender.restorationIdentifier {
             case "areaAccess": handleAreaAccessPressed()
-            case "amusementAreas": accessTest(forArea: .Amusement, canAccess: (entrantType?.canAccessAmusementAreas)!, count: &amusementCount, timer: &amusementTimer)
-            case "kitchenAreas": accessTest(forArea: .Kitchen, canAccess: (entrantType?.canAccessKitchenAreas)!, count: &kitchenCount, timer: &kitchenTimer)
-            case "rideControlAreas": accessTest(forArea: .RideControl, canAccess: (entrantType?.canAccessRideControlAreas)!, count: &rideControlCount, timer: &rideControlTimer)
-            case "officeAreas": accessTest(forArea: .Office, canAccess: (entrantType?.canAccessOfficeAreas)!, count: &officeCount, timer: &officeTimer)
-            case "maintenanceAreas": accessTest(forArea: .Maintenance, canAccess: (entrantType?.canAccessMaintenanceAreas)!, count: &maintenanceCount, timer: &maintenanceTimer)
+            case "amusementAreas":
+                accessTest(forArea: .Amusement, canAccess: (entrantType?.canAccessAmusementAreas)!, count: &amusementCount, timer: &amusementTimer)
+                checkBirthday()
+            case "kitchenAreas":
+                accessTest(forArea: .Kitchen, canAccess: (entrantType?.canAccessKitchenAreas)!, count: &kitchenCount, timer: &kitchenTimer)
+                checkBirthday()
+            case "rideControlAreas":
+                accessTest(forArea: .RideControl, canAccess: (entrantType?.canAccessRideControlAreas)!, count: &rideControlCount, timer: &rideControlTimer)
+                checkBirthday()
+            case "officeAreas":
+                accessTest(forArea: .Office, canAccess: (entrantType?.canAccessOfficeAreas)!, count: &officeCount, timer: &officeTimer)
+                checkBirthday()
+            case "maintenanceAreas":
+                accessTest(forArea: .Maintenance, canAccess: (entrantType?.canAccessMaintenanceAreas)!, count: &maintenanceCount, timer: &maintenanceTimer)
+                checkBirthday()
             case "rideAccess":
                                 hideAreaAccessBtns()
                                 rideAccessTest(rideAccess: (entrantType?.canAccessAllRides)!)
                                 skipRideLines(skipLines: (entrantType?.canSkipRideLines)!)
                                 checkBirthday()
             case "discountAccess":
-                                happyBirthdayLabel.isHidden = true
                                 hideAreaAccessBtns()
                                 discountTest(foodAccess: (entrantType?.foodDiscount)!, merchAccess: (entrantType?.merchandiseDiscount)!)
+                                checkBirthday()
             default: return
         }
     }

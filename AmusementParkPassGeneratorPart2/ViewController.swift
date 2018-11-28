@@ -121,6 +121,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     projectNmbr.text = projectPicker!.options[myProjectPicker.selectedRow(inComponent: 0)]
                 }
             }
+        case dateOfBirth:
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            dateOfBirth.text = formatter.string(from: birthdayDatePicker.date)
         default: return
         }
     }
@@ -287,11 +291,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             case _ where zipCode?.text?.isEmpty == false && zipCode?.text?.rangeOfCharacter(from: disallowedNonNumSet) != nil: throw ErrorTypes.NumbersOnly
             
             //Child Over 5 Years//
-    //        case _ where entrantT == .FreeChild && dateOfBirth?.text?.isEmpty == false && checkAgeIsUnder5(date: dateOfBirth.text!) == false: throw ErrorTypes.ChildIsOlderThan5
             case _ where entrantType == .guest(.child) && dateOfBirth?.text?.isEmpty == false && checkAgeIsUnder5(date: dateOfBirth.text!) == false: throw ErrorTypes.ChildIsOlderThan5
             
             //Senior Over 55 Years//
-    //        case _ where entrantT == .Senior && dateOfBirth?.text?.isEmpty == false && checkAgeIsOver55(date: dateOfBirth.text!) == false: throw ErrorTypes.SeniorIsYoungerThan55
             case _ where entrantType == .guest(.senior) && dateOfBirth?.text?.isEmpty == false && checkAgeIsOver55(date: dateOfBirth.text!) == false: throw ErrorTypes.SeniorIsYoungerThan55
             
             case _ where entrantType == nil: throw ErrorTypes.EntrantTypeNil
@@ -300,26 +302,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//////////////Not Being Used//////////////
-    //Filter Text Fields by Background Color//
-    func filterTextFields() -> [UITextField]{
-        let textFields = [dateOfBirth, dateOfVisit, phoneNumber, firstName, lastName, companyName, streetAddress, city, state, zipCode, projectNmbr]
-        var requiredTextFields: [UITextField] = []
-        
-        for textField in textFields {
-            if textField?.backgroundColor == .white {
-                requiredTextFields.append(textField!)
-            }
-        }
-        return requiredTextFields
-    }
     
-    
-    //Prepare for Segue Method//
+    //Prepare for Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let entrantType = self.entrantType else { return }
+        let entrant: Entrant?
         
-        let entrant = Entrant(firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!, dateOfBirth: dateOfBirth.text!, monthOfBirth: 11, dayOfBirth: 24, yearOfBirth: 1981, entrantType: entrantType)
+        switch entrantType {
+            case .guest(.child): entrant = ChildGuest(birthDate: dateOfBirth.text!, entrantType: entrantType)
+            case .guest(.adult): entrant = AdultGuest(entrantType: entrantType)
+            case .guest(.senior): entrant = SeniorGuest(entrantType: entrantType, birthDate: dateOfBirth.text!, firstName: firstName.text!, lastName: lastName.text!)
+            case .guest(.vip): entrant = VIPGuest(entrantType: entrantType)
+            case .guest(.season): entrant = SeasonPassGuest(entrantType: entrantType, firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!)
+            
+            case .employee(.hourly): entrant = Employee(entrantType: entrantType, firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!)
+            case .employee(.contract): entrant = ContractEmployee(entrantType: entrantType, firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!, projectNumber: projectNmbr.text!)
+            case .employee(.management): entrant = Manager(entrantType: entrantType, firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!)
+            
+            case .vendor: entrant = Vendor(entrantType: entrantType, birthDate: dateOfBirth.text!, firstName: firstName.text!, lastName: lastName.text!, companyNameable: companyName.text!, visitDate: dateOfVisit.text!)
+        }
+        
+//        let entrant = Entrant(firstName: firstName.text!, lastName: lastName.text!, street: streetAddress.text!, city: city.text!, state: state.text!, zip: zipCode.text!, dateOfBirth: dateOfBirth.text!, entrantType: entrantType)
  
  
         if segue.identifier == "CreatePassSegue" {
@@ -334,7 +337,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
 
     
-    //Set Text Fields Back to nil//
+    //Set Text Fields Back to nil
     func clearData() {
         self.performSegue(withIdentifier: "CreatePassSegue", sender: nil)
         dateOfBirth.text = nil
@@ -351,14 +354,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    //Enable Text Field User Interaction//
+    //Enable Text Field User Interaction
     func enableTextFields(){
         let textFields = [dateOfBirth, dateOfVisit, phoneNumber, firstName, lastName, companyName, streetAddress, city, state, zipCode, projectNmbr]
         for field in textFields {
             field?.isUserInteractionEnabled = true
         }
     }
-    //Disable Text Field User Interaction//
+    //Disable Text Field User Interaction
     func disableTextFields() {
         let textFields = [dateOfBirth, dateOfVisit, phoneNumber, firstName, lastName, companyName, streetAddress, city, state, zipCode, projectNmbr]
         for field in textFields {
@@ -393,11 +396,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    func setRequiredTxtFields(button: UIButton) {
-//        if button == seniorGuest {
-//
-//        }
-//    }
     
     func populate(field: UITextField, with plugData: String) {
         if field.isEnabled {
@@ -462,7 +460,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             if button == contractEmp{
                 requireTextField(textField: projectNmbr)
-//                entrantType = .employee(.contract(.project1001))
                 entrantType = nil
             }
             
@@ -605,8 +602,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if dateOfVisit.isEnabled {
             let date = Date()
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "mm/DD/yyyy"
+            dateFormatter.dateFormat = "MM/dd/yyyy"
             let dateString = dateFormatter.string(from: date)
+            print(date)
             self.populate(field: dateOfVisit, with: dateString)
         }
         

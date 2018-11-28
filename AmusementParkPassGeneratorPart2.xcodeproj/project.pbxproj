@@ -20,6 +20,8 @@
 		8480539E1E33D9100067B025 /* CheckAge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480539D1E33D9100067B025 /* CheckAge.swift */; };
 		8483B6B321A9167A00D832B3 /* PickerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483B6B221A9167A00D832B3 /* PickerViews.swift */; };
 		8483B6B521AB55E000D832B3 /* CountdownTimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483B6B421AB55E000D832B3 /* CountdownTimers.swift */; };
+		8483B6B821AF3F5800D832B3 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483B6B721AF3F5800D832B3 /* Protocols.swift */; };
+		8483B6BA21AF3F8B00D832B3 /* Entrants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483B6B921AF3F8B00D832B3 /* Entrants.swift */; };
 		849E17E81E12DB8900A66E07 /* PassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E17E71E12DB8900A66E07 /* PassViewController.swift */; };
 		849E18301E17411A00A66E07 /* AccessAreas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E182B1E17411A00A66E07 /* AccessAreas.swift */; };
 		849E18321E17411A00A66E07 /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E182D1E17411A00A66E07 /* ErrorTypes.swift */; };
@@ -65,6 +67,8 @@
 		8480539D1E33D9100067B025 /* CheckAge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAge.swift; sourceTree = "<group>"; };
 		8483B6B221A9167A00D832B3 /* PickerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViews.swift; sourceTree = "<group>"; };
 		8483B6B421AB55E000D832B3 /* CountdownTimers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimers.swift; sourceTree = "<group>"; };
+		8483B6B721AF3F5800D832B3 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		8483B6B921AF3F8B00D832B3 /* Entrants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entrants.swift; sourceTree = "<group>"; };
 		849E17E71E12DB8900A66E07 /* PassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassViewController.swift; sourceTree = "<group>"; };
 		849E182B1E17411A00A66E07 /* AccessAreas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessAreas.swift; sourceTree = "<group>"; };
 		849E182D1E17411A00A66E07 /* ErrorTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
@@ -124,17 +128,16 @@
 				8433C6AF1E0EED35009B45F3 /* AppDelegate.swift */,
 				849323A41E3FA0B6003B463E /* EntryForm */,
 				8483B6B621AB55EA00D832B3 /* EntrantPass */,
+				8483B6BB21AF533600D832B3 /* Entrant */,
+				849E182B1E17411A00A66E07 /* AccessAreas.swift */,
+				849E182D1E17411A00A66E07 /* ErrorTypes.swift */,
 				8433C6B31E0EED36009B45F3 /* Main.storyboard */,
+				8433C6B81E0EED36009B45F3 /* LaunchScreen.storyboard */,
 				8433C6B61E0EED36009B45F3 /* Assets.xcassets */,
 				8433C6DD1E0EEDFC009B45F3 /* FaceImageAsset.png */,
 				849E18371E1FDEE000A66E07 /* AccessDenied.wav */,
 				849E18381E1FDEE000A66E07 /* AccessGranted.wav */,
-				8433C6B81E0EED36009B45F3 /* LaunchScreen.storyboard */,
-				849E18351E17416200A66E07 /* Entrant.swift */,
-				849E182B1E17411A00A66E07 /* AccessAreas.swift */,
-				849E182D1E17411A00A66E07 /* ErrorTypes.swift */,
 				8433C6BB1E0EED36009B45F3 /* Info.plist */,
-				8452E4BA219CB1F50072ED3B /* EntrantType.swift */,
 			);
 			path = AmusementParkPassGeneratorPart2;
 			sourceTree = "<group>";
@@ -164,6 +167,17 @@
 				8483B6B421AB55E000D832B3 /* CountdownTimers.swift */,
 			);
 			name = EntrantPass;
+			sourceTree = "<group>";
+		};
+		8483B6BB21AF533600D832B3 /* Entrant */ = {
+			isa = PBXGroup;
+			children = (
+				8483B6B921AF3F8B00D832B3 /* Entrants.swift */,
+				8452E4BA219CB1F50072ED3B /* EntrantType.swift */,
+				8483B6B721AF3F5800D832B3 /* Protocols.swift */,
+				849E18351E17416200A66E07 /* Entrant.swift */,
+			);
+			name = Entrant;
 			sourceTree = "<group>";
 		};
 		849323A41E3FA0B6003B463E /* EntryForm */ = {
@@ -323,6 +337,8 @@
 				849E17E81E12DB8900A66E07 /* PassViewController.swift in Sources */,
 				8433C6B21E0EED35009B45F3 /* ViewController.swift in Sources */,
 				849E18301E17411A00A66E07 /* AccessAreas.swift in Sources */,
+				8483B6BA21AF3F8B00D832B3 /* Entrants.swift in Sources */,
+				8483B6B821AF3F5800D832B3 /* Protocols.swift in Sources */,
 				84334DFE1E3590920050C557 /* CheckFieldFormat.swift in Sources */,
 				849E18321E17411A00A66E07 /* ErrorTypes.swift in Sources */,
 				849E18361E17416200A66E07 /* Entrant.swift in Sources */,

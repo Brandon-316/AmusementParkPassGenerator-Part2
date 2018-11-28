@@ -9,13 +9,11 @@
 import Foundation
 import UIKit
 
-var birth = NSDateComponents()
+// Unused. Original method where I did not subclass
 
-
-//////////////////
-//Entrant Class///
-//////////////////
-class Entrant: Nameable, Addressable, BirthDateable {
+/*
+//Entrant Class
+class Entrant: Nameable, Addressable {
     var firstName: String
     var lastName: String
     
@@ -26,15 +24,11 @@ class Entrant: Nameable, Addressable, BirthDateable {
     
     var dateOfBirth: String
     
-    var monthOfBirth: Int
-    var dayOfBirth: Int
-    var yearOfBirth: Int
-    
     var entrantType: EntrantType
     
     
     
-    init(firstName: String, lastName: String, street: String, city: String, state: String, zip: String, dateOfBirth: String, monthOfBirth: Int, dayOfBirth: Int, yearOfBirth: Int, entrantType: EntrantType) {
+    init(firstName: String, lastName: String, street: String, city: String, state: String, zip: String, dateOfBirth: String, entrantType: EntrantType) {
         self.firstName = firstName
         self.lastName = lastName
         self.street = street
@@ -42,17 +36,12 @@ class Entrant: Nameable, Addressable, BirthDateable {
         self.state = state
         self.zip = zip
         self.dateOfBirth = dateOfBirth
-        self.monthOfBirth = monthOfBirth
-        self.dayOfBirth = dayOfBirth
-        self.yearOfBirth = yearOfBirth
         self.entrantType = entrantType
     }
 }
 
 
-/////////////////
-//Required Info//
-/////////////////
+//Required Info
 protocol Nameable {
     var firstName: String { get set }
     var lastName: String {get set }
@@ -65,12 +54,6 @@ protocol Addressable {
     var zip: String { get set }
 }
 
-protocol BirthDateable {
-    var dayOfBirth: Int { get set }
-    var monthOfBirth: Int { get set }
-    var yearOfBirth: Int { get set }
-}
-
 protocol CompanyNameable {
     var vendorCompany: String { get set }
     var visit: Date { get set }
@@ -79,19 +62,5 @@ protocol CompanyNameable {
 protocol Contractable {
     var projectNumber: String { get set }
 }
-
-
-////////////////////////
-//Birth Date Functions//
-////////////////////////
-func birthDate(month: Int, day: Int, year: Int) -> Date {
-    let dateOfBirth = NSDateComponents()
-    dateOfBirth.day = day
-    dateOfBirth.month = month
-    dateOfBirth.year = year
-    
-    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
-    return (calendar?.date(from: dateOfBirth as DateComponents))!
-}
-
+*/
 

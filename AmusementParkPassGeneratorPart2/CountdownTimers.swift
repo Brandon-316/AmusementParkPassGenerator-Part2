@@ -26,10 +26,8 @@ extension PassViewController {
     
     @objc func runAmusementCountdown() {
         if (amusementCount > 0){
-            print(amusementCount)
             amusementCount -= 1
         }else{
-            print("Invalidate")
             amusementTimer.invalidate()
         }
     }
