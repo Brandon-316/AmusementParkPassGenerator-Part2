@@ -131,8 +131,8 @@ class PassViewController: UIViewController {
         }
     }
     
-    //Test Ride Access//
-    //Can Ride All Rides//
+    //Test Ride Access
+    //Can Ride All Rides
     func rideAccessTest(rideAccess: Bool) {
         if rideAccess == true {
             testResultsLabel.text = "You May Ride All Rides"
@@ -235,6 +235,7 @@ class PassViewController: UIViewController {
         }
     }
     
+    // If visit date is specified compare with todays date
     func checkDateOfVisit() -> Bool {
         guard let unwrappedEntrant = self.entrant else { return false }
         
@@ -254,6 +255,7 @@ class PassViewController: UIViewController {
         }
     }
     
+    // Hide or unhide area access buttons
     func handleAreaAccessPressed() {
         let buttons = [amusementAreasBtn, kitchenAreasBtn, rideControlAreasBtn, maintenanceAreasBtn, officeAreasBtn]
         for button in buttons {

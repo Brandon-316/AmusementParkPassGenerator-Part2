@@ -8,7 +8,6 @@
 
 import UIKit
 
-// https://stackoverflow.com/questions/35505655/adopting-equatable-protocol-for-enum-with-nested-enum-values
 
 class ViewController: UIViewController, UITextFieldDelegate {
     

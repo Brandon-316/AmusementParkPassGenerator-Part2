@@ -11,7 +11,7 @@ import UIKit
 
 
 extension PassViewController {
-    //Timer Methods//
+    //Timer methods which are used to limit one swipe every 5 seconds
     func startCountdown(forArea area: AccessArea, count: inout Int, timer: inout Timer) {
         count = 5
         switch area {
