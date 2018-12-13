@@ -502,90 +502,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
             try checkForRequiredFields()
             
         }catch ErrorTypes.EnterAllRequiredFields{
-            let alertController = UIAlertController(title: "Missing Required Info", message: "Please fill in all required text fields.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Missing Required Info", message: "Please fill in all required text fields", vc: self)
         }catch ErrorTypes.EntrantTypeNil{
-            let alertController = UIAlertController(title: "Missing Entrant Type", message: "Please Select a Entrant Type.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Missing Entrant Type", message: "Please Select a Entrant Type.", vc: self)
         }catch ErrorTypes.DateFormat{
-            let alertController = UIAlertController(title: "Date Is In Incorrect Format", message: "Date must be in the format 11/11/2017", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Date Is In Incorrect Format", message: "Date must be in the format 11/11/2017", vc: self)
         }catch ErrorTypes.FirstNameFieldLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "First Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "First Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.LastNameFieldLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "Last Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "Last Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.ZipCodeLessThan5{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "Zip Code Field Requires a Minimum of 5 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "Zip Code Field Requires a Minimum of 5 Characters", vc: self)
         }catch ErrorTypes.ProjectNumLessThan4{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "Project Number Field Requires a Minimum of 5 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "Project Number Field Requires a Minimum of 5 Characters", vc: self)
         }catch ErrorTypes.CompanyLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "Company Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "Company Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.StreetLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "Street Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "Street Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.CityLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "City Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "City Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.StateLessThan2Char{
-            let alertController = UIAlertController(title: "Under Minimum Characters", message: "State Name Field Requires a Minimum of 2 Characters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Under Minimum Characters", message: "State Name Field Requires a Minimum of 2 Characters", vc: self)
         }catch ErrorTypes.LettersOnly{
-            let alertController = UIAlertController(title: "Must Only Contain Letters", message: "First, Last, City and State Name Fields May Only Contain Letters", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Must Only Contain Letters", message: "First, Last, City and State Name Fields May Only Contain Letters", vc: self)
         }catch ErrorTypes.NumbersOnly{
-            let alertController = UIAlertController(title: "Must Only Contain Numbers", message: "Zipcode and Project Number fields may only contain numbers", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Must Only Contain Numbers", message: "Zipcode and Project Number fields may only contain numbers", vc: self)
         }catch ErrorTypes.PhoneNumberFormat{
-            let alertController = UIAlertController(title: "Phone Number in Incorrect Format", message: "Phone number must be in the format 123-123-1234", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Phone Number in Incorrect Format", message: "Phone number must be in the format 123-123-1234", vc: self)
         }catch ErrorTypes.ChildIsOlderThan5{
-            let alertController = UIAlertController(title: "Child Older Than 5", message: "Child must be 5 years old or younger", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Child Older Than 5", message: "Child must be 5 years old or younger", vc: self)
         }catch ErrorTypes.SeniorIsYoungerThan55{
-            let alertController = UIAlertController(title: "Guest is Younger Than 55", message: "Senior must be 55 years or older", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Guest is Younger Than 55", message: "Senior must be 55 years or older", vc: self)
         }catch {
-            let alertController = UIAlertController(title: "Missing Required Info", message: "Please fill in all required text fields.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            present(alertController, animated: true, completion: nil)
+            AlertUser().generalAlert(title: "Missing Required Info", message: "Please fill in all required text fields.", vc: self)
         }
     }
     //Populate Data Button Action//

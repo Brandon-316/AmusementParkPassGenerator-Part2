@@ -28,6 +28,7 @@
 		849E18361E17416200A66E07 /* Entrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E18351E17416200A66E07 /* Entrant.swift */; };
 		849E18391E1FDEE000A66E07 /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 849E18371E1FDEE000A66E07 /* AccessDenied.wav */; };
 		849E183A1E1FDEE000A66E07 /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 849E18381E1FDEE000A66E07 /* AccessGranted.wav */; };
+		84BEAAF721C1E75700FC628F /* AlertUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEAAF621C1E75700FC628F /* AlertUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		849E18351E17416200A66E07 /* Entrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entrant.swift; sourceTree = "<group>"; };
 		849E18371E1FDEE000A66E07 /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessDenied.wav; sourceTree = "<group>"; };
 		849E18381E1FDEE000A66E07 /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessGranted.wav; sourceTree = "<group>"; };
+		84BEAAF621C1E75700FC628F /* AlertUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				8483B6BB21AF533600D832B3 /* Entrant */,
 				849E182B1E17411A00A66E07 /* AccessAreas.swift */,
 				849E182D1E17411A00A66E07 /* ErrorTypes.swift */,
+				84BEAAF621C1E75700FC628F /* AlertUser.swift */,
 				8433C6B31E0EED36009B45F3 /* Main.storyboard */,
 				8433C6B81E0EED36009B45F3 /* LaunchScreen.storyboard */,
 				8433C6B61E0EED36009B45F3 /* Assets.xcassets */,
@@ -347,6 +350,7 @@
 				8433C6B01E0EED35009B45F3 /* AppDelegate.swift in Sources */,
 				8483B6B521AB55E000D832B3 /* CountdownTimers.swift in Sources */,
 				8483B6B321A9167A00D832B3 /* PickerViews.swift in Sources */,
+				84BEAAF721C1E75700FC628F /* AlertUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
